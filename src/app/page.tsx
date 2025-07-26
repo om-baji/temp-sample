@@ -3,79 +3,7 @@ import React, { useState } from 'react'
 import FilterCard from '@/components/FilterCard'
 import Card from '@/components/Card'
 import ListItem from '@/components/ListItem'
-
-const listings = [
-  {
-    name: "Sunset Apartments",
-    address: "123 Main St, Miami, FL",
-    applicationStartDate: "2024-07-01",
-    applicationEndDate: "2024-07-15",
-    lotteryDateTime: "2024-07-20 10:00 AM"
-  },
-  {
-    name: "Palm Grove Homes",
-    address: "456 Palm Ave, Miami, FL",
-    applicationStartDate: "2024-08-01",
-    applicationEndDate: "2024-08-10",
-    lotteryDateTime: "2024-08-15 2:00 PM"
-  },
-  {
-    name: "Ocean View Residences",
-    address: "789 Ocean Dr, Miami, FL",
-    applicationStartDate: "2024-09-01",
-    applicationEndDate: "2024-09-12",
-    lotteryDateTime: "2024-09-18 11:00 AM"
-  },
-  {
-    name: "Coconut Villas",
-    address: "321 Coconut Rd, Miami, FL",
-    applicationStartDate: "2024-10-01",
-    applicationEndDate: "2024-10-15",
-    lotteryDateTime: "2024-10-20 9:00 AM"
-  },
-  {
-    name: "Bayside Lofts",
-    address: "555 Bayside Blvd, Miami, FL",
-    applicationStartDate: "2024-07-10",
-    applicationEndDate: "2024-07-25",
-    lotteryDateTime: "2024-07-30 3:00 PM"
-  },
-  {
-    name: "Coral Reef Estates",
-    address: "888 Coral Way, Miami, FL",
-    applicationStartDate: "2024-08-15",
-    applicationEndDate: "2024-08-28",
-    lotteryDateTime: "2024-09-02 1:00 PM"
-  },
-  {
-    name: "Brickell Heights",
-    address: "101 Brickell Ave, Miami, FL",
-    applicationStartDate: "2024-09-05",
-    applicationEndDate: "2024-09-20",
-    lotteryDateTime: "2024-09-25 4:00 PM"
-  },
-  {
-    name: "Little Havana Residences",
-    address: "202 Calle Ocho, Miami, FL",
-    applicationStartDate: "2024-10-10",
-    applicationEndDate: "2024-10-22",
-    lotteryDateTime: "2024-10-28 10:30 AM"
-  },
-  {
-    name: "Wynwood Flats",
-    address: "303 Art St, Miami, FL",
-    applicationStartDate: "2024-11-01",
-    applicationEndDate: "2024-11-15",
-    lotteryDateTime: "2024-11-20 2:00 PM"
-  },
-  {
-    name: "Dadeland Towers",
-    address: "404 Dadeland Blvd, Miami, FL",
-    applicationStartDate: "2024-12-01",
-    applicationEndDate: "2024-12-10",
-    lotteryDateTime: "2024-12-15 11:00 AM"
-  }
-];
+import { listings } from '@/constants/list'
 
 const Page = () => {
   const [activeTab, setActiveTab] = useState<'Rentals' | 'Sales'>('Rentals');
@@ -121,6 +49,7 @@ const Page = () => {
           {listings.map((listing, idx) => (
             viewMode === 'grid' ? (
               <Card
+                imageUrl={listing.imageUrl}
                 key={listing.name + idx}
                 name={listing.name}
                 address={listing.address}
