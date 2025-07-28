@@ -165,18 +165,17 @@ const Header = () => {
             )}
           </div>
           <a href="#" className="flex items-center gap-2 text-gray-700 hover:text-[#28649b] font-medium transition-colors duration-150">
-            <Image
-              src="/login.png"
-              alt="Login Icon"
-              width={28}
-              height={28}
-              className="object-contain"
-              priority
-            />
-            <span className="font-medium">Login</span>
-            <svg width="16" height="16" fill="currentColor" className="ml-1">
-              <path d="M8 5v14l2-2l2 2V5H8z"/>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="mr-1"
+              style={{ display: 'inline', verticalAlign: 'middle' }}
+            >
+              <path d="M2 10a1 1 0 0 1 1-1h8V6.414a1 1 0 0 1 1.707-.707l4.586 4.586a1 1 0 0 1 0 1.414l-4.586 4.586A1 1 0 0 1 11 17.586V14H3a1 1 0 0 1-1-1v-3z"/>
             </svg>
+            <span className="font-medium">Login</span>
           </a>
         </div>
       </div>

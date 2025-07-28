@@ -3,31 +3,26 @@ import React, { useState } from 'react'
 import FilterCard from '@/components/FilterCard'
 import Card from '@/components/Card'
 import ListItem from '@/components/ListItem'
-import { listings } from '@/constants/list'
+import data from '../../public/data.json'
+
+const INITIAL_COUNT = 9; 
+const LOAD_MORE_COUNT = 9;
 
 const Page = () => {
-  const [activeTab, setActiveTab] = useState<'Rentals' | 'Sales'>('Rentals');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+
+  const handleShowMore = () => {
+    setVisibleCount((prev) => Math.min(prev + LOAD_MORE_COUNT, data.length));
+  };
+
+  const visibleListings = data.slice(0, visibleCount);
 
   return (
     <div className="bg-gray-50 min-h-screen pb-10">
       <FilterCard />
       <div className="max-w-6xl mx-auto mt-6 bg-white rounded shadow p-6">
-        <div className="flex items-center justify-between border-b mb-6 pb-2">
-          <div className="flex">
-            <button
-              className={`px-4 py-2 font-semibold text-lg border-b-2 transition-colors duration-150 ${activeTab === 'Rentals' ? 'border-blue-600 text-blue-600 bg-gray-100' : 'border-transparent text-gray-600'}`}
-              onClick={() => setActiveTab('Rentals')}
-            >
-              Rentals
-            </button>
-            <button
-              className={`ml-2 px-4 py-2 font-semibold text-lg border-b-2 transition-colors duration-150 ${activeTab === 'Sales' ? 'border-blue-600 text-blue-600 bg-gray-100' : 'border-transparent text-gray-600'}`}
-              onClick={() => setActiveTab('Sales')}
-            >
-              Sales
-            </button>
-          </div>
+        <div className="flex items-center justify-end border-b mb-6 pb-2">
           <div className="flex items-center gap-2">
             <button
               className={`p-2 rounded ${viewMode === 'grid' ? 'bg-blue-100 text-blue-600' : 'bg-gray-100 text-gray-600'}`}
@@ -46,29 +41,46 @@ const Page = () => {
           </div>
         </div>
         <div className={viewMode === 'grid' ? 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6' : 'flex flex-col gap-6'}>
-          {listings.map((listing, idx) => (
+          {visibleListings.map((listing) => (
             viewMode === 'grid' ? (
               <Card
-                imageUrl={listing.imageUrl}
-                key={listing.name + idx}
-                name={listing.name}
+                imageUrl={listing.image}
+                key={listing.id}
+                project={listing.project}
                 address={listing.address}
-                applicationStartDate={listing.applicationStartDate}
-                applicationEndDate={listing.applicationEndDate}
-                lotteryDateTime={listing.lotteryDateTime}
+                zipcode={listing.zipcode}
+                district={listing.district}
+                phone={listing.phone}
+                units={Number(listing.units)}
+                projectType={listing.projectType}
+                housingType={listing.housingType}
               />
             ) : (
               <ListItem
-                key={listing.name + idx}
-                name={listing.name}
+                key={listing.id}
+                imageUrl={listing.image}
+                project={listing.project}
                 address={listing.address}
-                applicationStartDate={listing.applicationStartDate}
-                applicationEndDate={listing.applicationEndDate}
-                lotteryDateTime={listing.lotteryDateTime}
+                zipcode={listing.zipcode}
+                district={listing.district}
+                phone={listing.phone}
+                units={Number(listing.units)}
+                projectType={listing.projectType}
+                housingType={listing.housingType}
               />
             )
           ))}
         </div>
+        {visibleCount < data.length && (
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={handleShowMore}
+              className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+            >
+              Show More
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
