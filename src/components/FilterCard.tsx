@@ -92,32 +92,34 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
             <div className="text-sm font-semibold mb-4">Search</div>
             <form className="flex flex-col gap-4" autoComplete="off" onSubmit={handleSubmit}>
                 <div className="flex flex-wrap gap-6">
-                    <div className="flex flex-col min-w-[200px] relative">
+                    <div className="flex flex-col min-w-[200px]">
                         <label className="text-xs font-medium mb-1" htmlFor="zipcode">Zipcode</label>
-                        <input
-                            id="zipcode"
-                            type="text"
-                            className="border rounded px-3 py-2 text-sm"
-                            value={formValues.zipcode}
-                            onChange={handleZipChange}
-                            onFocus={() => setShowZipSuggestions(true)}
-                            onBlur={handleZipBlur}
-                            placeholder="Enter zipcode"
-                            autoComplete="off"
-                        />
-                        {showZipSuggestions && filteredZipcodes.length > 0 && (
-                            <ul className="absolute z-10 bg-white border border-gray-200 rounded shadow mt-1 w-full max-h-40 overflow-auto">
-                                {filteredZipcodes.slice(0, 10).map((zip, idx) => (
-                                    <li
-                                        key={zip}
-                                        className="px-3 py-1 hover:bg-blue-100 cursor-pointer text-sm"
-                                        onMouseDown={() => handleZipSelect(zip)}
-                                    >
-                                        {zip}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
+                        <div className="relative">
+                            <input
+                                id="zipcode"
+                                type="text"
+                                className="border rounded px-3 py-2 text-sm w-full"
+                                value={formValues.zipcode}
+                                onChange={handleZipChange}
+                                onFocus={() => setShowZipSuggestions(true)}
+                                onBlur={handleZipBlur}
+                                placeholder="Enter zipcode"
+                                autoComplete="off"
+                            />
+                            {showZipSuggestions && filteredZipcodes.length > 0 && (
+                                <ul className="absolute z-10 bg-white border border-gray-200 rounded shadow mt-1 w-full max-h-40 overflow-auto">
+                                    {filteredZipcodes.slice(0, 10).map((zip, idx) => (
+                                        <li
+                                            key={zip}
+                                            className="px-3 py-1 hover:bg-blue-100 cursor-pointer text-sm"
+                                            onMouseDown={() => handleZipSelect(zip)}
+                                        >
+                                            {zip}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
                     </div>
                     <div className="flex flex-col min-w-[200px]">
                         <label className="text-xs font-medium mb-1" htmlFor="district">District</label>

@@ -17,25 +17,22 @@ const Page = () => {
     housingType: ''
   });
 
-  // Filter the data based on active filters (only applied when search is clicked)
   const filteredData = useMemo(() => {
     return data.filter(item => {
-      // Filter by zipcode
+    
       if (activeFilters.zipcode && String(item.zipcode) !== activeFilters.zipcode) {
         return false;
       }
-      
-      // Filter by district
+  
       if (activeFilters.district && String(item.district) !== activeFilters.district) {
         return false;
       }
       
-      // Filter by project type
+   
       if (activeFilters.projectType && item.projectType !== activeFilters.projectType) {
         return false;
       }
       
-      // Filter by housing type
       if (activeFilters.housingType && item.housingType !== activeFilters.housingType) {
         return false;
       }
@@ -44,13 +41,11 @@ const Page = () => {
     });
   }, [activeFilters]);
 
-  // Calculate pagination based on filtered data
   const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const visibleListings = filteredData.slice(startIndex, endIndex);
 
-  // Reset to first page when filters change
   React.useEffect(() => {
     setCurrentPage(1);
   }, [activeFilters]);
@@ -72,7 +67,6 @@ const Page = () => {
   };
 
   const handleFiltersChange = (newFilters: typeof activeFilters) => {
-    // Only apply filters when search button is clicked
     setActiveFilters(newFilters);
   };
 
@@ -118,6 +112,13 @@ const Page = () => {
     }
     
     return pages;
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (
@@ -228,6 +229,16 @@ const Page = () => {
           </>
         )}
       </div>
+      
+      <button
+        onClick={scrollToTop}
+        className="fixed bottom-6 right-6 w-12 h-12 p-7 bg-blue-200 rounded-lg shadow-lg hover:bg-blue-400 transition-colors duration-200 flex items-center justify-center z-50"
+        aria-label="Scroll to top"
+      >
+        <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
+          <path d="M12 4l8 8h-6v8h-4v-8H4z"/>
+        </svg>
+      </button>
     </div>
   );
 };

@@ -52,9 +52,9 @@ const Header = () => {
   ];
 
   return (
-    <header className="w-full fixed top-0 left-0 right-0 z-50">
-      <div className="bg-[#28649b] text-white flex justify-end items-center px-8 h-8 text-xs font-medium">
-        <div className="flex gap-8">
+      <header className="w-full fixed top-0 left-0 right-0 z-50">
+      <div className="bg-[#28649b] text-white flex justify-end items-center px-8 h-10 text-xs font-medium">
+        <div className="flex gap-8 mr-20">
           <a href="#" className="hover:underline">311</a>
           <a href="#" className="hover:underline">GovMeetings</a>
           <a href="#" className="hover:underline">Calendar</a>
@@ -68,8 +68,8 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <div className="bg-white flex items-center justify-between px-8 h-14 shadow-sm border-b border-gray-200">
-        <div className="flex items-center min-w-[180px]">
+      <div className="bg-white flex items-center justify-between px-8 h-16 shadow-sm border-b border-gray-200">
+        <div className="flex items-center min-w-[180px] justify-end">
           <div className="flex items-center">
             <Image
               src="/logo.png"
@@ -164,7 +164,7 @@ const Header = () => {
               </form>
             )}
           </div>
-          <a href="#" className="flex items-center gap-2 text-gray-700 hover:text-[#28649b] font-medium transition-colors duration-150">
+          <a href="#" className="flex items-center gap-2 text-gray-700 hover:text-[#28649b] font-medium transition-colors duration-150 mr-22">
             <svg
               width="20"
               height="20"
