@@ -19,21 +19,19 @@ const Page = () => {
 
   const filteredData = useMemo(() => {
     return data.filter(item => {
-    
-      if (activeFilters.zipcode && String(item.zipcode) !== activeFilters.zipcode) {
+      if (activeFilters.zipcode && activeFilters.zipcode !== 'all' && String(item.zipcode) !== activeFilters.zipcode) {
         return false;
       }
   
-      if (activeFilters.district && String(item.district) !== activeFilters.district) {
+      if (activeFilters.district && activeFilters.district !== 'all' && String(item.district) !== activeFilters.district) {
         return false;
       }
       
-   
-      if (activeFilters.projectType && item.projectType !== activeFilters.projectType) {
+      if (activeFilters.projectType && activeFilters.projectType !== 'all' && item.projectType !== activeFilters.projectType) {
         return false;
       }
       
-      if (activeFilters.housingType && item.housingType !== activeFilters.housingType) {
+      if (activeFilters.housingType && activeFilters.housingType !== 'all' && item.housingType !== activeFilters.housingType) {
         return false;
       }
       

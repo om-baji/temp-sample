@@ -74,7 +74,7 @@ const Header = () => {
             <Image
               src="/logo.png"
               alt="Miami-Dade County Logo"
-              width={70}
+              width={90}
               height={40}
               className="object-contain"
               priority

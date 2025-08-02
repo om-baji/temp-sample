@@ -1,5 +1,5 @@
 import { districts, typelist, housinglist } from '@/constants/menus'
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { getAllZipcodes } from '@/lib/utils'
 
 interface FilterCardProps {
@@ -30,15 +30,20 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
     const allZipcodes = useMemo(() => getAllZipcodes(), []);
 
     const filteredZipcodes = useMemo(() => {
-        if (!formValues.zipcode) return allZipcodes;
+        if (!formValues.zipcode) return [];
         return allZipcodes.filter(z =>
-            z.toLowerCase().startsWith(formValues.zipcode.toLowerCase())
+            z.toLowerCase().includes(formValues.zipcode.toLowerCase())
         );
     }, [formValues.zipcode, allZipcodes]);
 
+    useEffect(() => {
+        setFormValues(filters);
+    }, [filters]);
+
     const handleZipChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormValues({ ...formValues, zipcode: e.target.value });
-        setShowZipSuggestions(true);
+        const value = e.target.value;
+        setFormValues({ ...formValues, zipcode: value });
+        setShowZipSuggestions(value.length > 0);
     };
 
     const handleZipSelect = (zip: string) => {
@@ -58,17 +63,24 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
         setFormValues({ ...formValues, housingType: e.target.value });
     };
 
+    const handleZipFocus = () => {
+        if (formValues.zipcode.length > 0) {
+            setShowZipSuggestions(true);
+        }
+    };
+
     const handleZipBlur = () => {
-        setTimeout(() => setShowZipSuggestions(false), 100);
+        setTimeout(() => setShowZipSuggestions(false), 150);
     };
 
     const handleReset = () => {
-        setFormValues({
+        const resetValues = {
             zipcode: '',
             district: '',
             projectType: '',
             housingType: ''
-        });
+        };
+        setFormValues(resetValues);
         onReset();
     };
 
@@ -89,7 +101,6 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
                 backgroundBlendMode: 'screen'
             }}
         >
-            <div className="text-sm font-semibold mb-4">Search</div>
             <form className="flex flex-col gap-4" autoComplete="off" onSubmit={handleSubmit}>
                 <div className="flex flex-wrap gap-6">
                     <div className="flex flex-col min-w-[200px]">
@@ -101,18 +112,21 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
                                 className="border rounded px-3 py-2 text-sm w-full"
                                 value={formValues.zipcode}
                                 onChange={handleZipChange}
-                                onFocus={() => setShowZipSuggestions(true)}
+                                onFocus={handleZipFocus}
                                 onBlur={handleZipBlur}
                                 placeholder="Enter zipcode"
                                 autoComplete="off"
                             />
                             {showZipSuggestions && filteredZipcodes.length > 0 && (
-                                <ul className="absolute z-10 bg-white border border-gray-200 rounded shadow mt-1 w-full max-h-40 overflow-auto">
+                                <ul className="absolute z-50 bg-white border border-gray-200 rounded shadow mt-1 w-full max-h-40 overflow-auto">
                                     {filteredZipcodes.slice(0, 10).map((zip, idx) => (
                                         <li
                                             key={zip}
-                                            className="px-3 py-1 hover:bg-blue-100 cursor-pointer text-sm"
-                                            onMouseDown={() => handleZipSelect(zip)}
+                                            className="px-3 py-2 hover:bg-blue-100 cursor-pointer text-sm"
+                                            onMouseDown={(e) => {
+                                                e.preventDefault();
+                                                handleZipSelect(zip);
+                                            }}
                                         >
                                             {zip}
                                         </li>
@@ -131,6 +145,7 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
                             onChange={handleDistrictChange}
                         >
                             <option value="">Select District</option>
+                            <option value="all">Select All Districts</option>
                             {districts.map((district, idx) => (
                                 <option key={idx} value={district}>{district}</option>
                             ))}
@@ -145,6 +160,7 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
                             onChange={handleProjectTypeChange}
                         >
                             <option value="">Select Type</option>
+                            <option value="all">Select All Types</option>
                             {typelist.map((type, idx) => (
                                 <option key={idx} value={type}>{type}</option>
                             ))}
@@ -159,6 +175,7 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
                             onChange={handleHousingTypeChange}
                         >
                             <option value="">Select Housing Type</option>
+                            <option value="all">Select All Housing Types</option>
                             {housinglist.map((type, idx) => (
                                 <option key={idx} value={type}>{type}</option>
                             ))}
