@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Header = () => {
   const [showSearch, setShowSearch] = useState(false);
@@ -53,7 +54,7 @@ const Header = () => {
 
   return (
       <header className="w-full fixed top-0 left-0 right-0 z-50">
-      <div className="bg-[#28649b] text-white flex justify-end items-center px-8 h-10 text-xs font-medium">
+      <div className="bg-[#28649b] text-white flex justify-end items-center px-12 p-4 h-10 text-xs font-medium">
         <div className="flex gap-8 mr-20">
           <a href="#" className="hover:underline">311</a>
           <a href="#" className="hover:underline">GovMeetings</a>
@@ -68,7 +69,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <div className="bg-white flex items-center justify-between px-8 h-16 shadow-sm border-b border-gray-200">
+      <div className="bg-white p-10 flex items-center justify-between px-20 h-16 shadow-sm border-b border-gray-200">
         <div className="flex items-center min-w-[180px] justify-end">
           <div className="flex items-center">
             <Image
@@ -81,14 +82,14 @@ const Header = () => {
             />
           </div>
         </div>
-        <nav className="flex-1 flex justify-start ml-8">
+        <nav className="flex-1 flex ml-8">
           {navigationItems.map((item, idx) => (
             <div
               key={item.title}
               className={`relative group flex items-center ${idx !== navigationItems.length - 1 ? 'border-r border-gray-200' : ''}`}
               style={{ minHeight: '40px' }}
             >
-              <button className="flex items-center gap-1 font-semibold text-gray-800 hover:text-[#28649b] transition-colors duration-200 py-1 px-4 text-sm">
+              <button className="flex items-center gap-1 font-semibold text-gray-800 hover:text-[#28649b] transition-colors duration-200 py-1 px-4 text-md">
                 {item.title}
                 <svg width="14" height="14" fill="currentColor" className="inline ml-1 transition-transform duration-200 group-hover:rotate-180">
                   <path d="M7 10l4-5H3z"/>
@@ -165,16 +166,7 @@ const Header = () => {
             )}
           </div>
           <a href="#" className="flex items-center gap-2 text-gray-700 hover:text-[#28649b] font-medium transition-colors duration-150 mr-22">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="mr-1"
-              style={{ display: 'inline', verticalAlign: 'middle' }}
-            >
-              <path d="M2 10a1 1 0 0 1 1-1h8V6.414a1 1 0 0 1 1.707-.707l4.586 4.586a1 1 0 0 1 0 1.414l-4.586 4.586A1 1 0 0 1 11 17.586V14H3a1 1 0 0 1-1-1v-3z"/>
-            </svg>
+            <LogoutIcon/>
             <span className="font-medium">Login</span>
           </a>
         </div>

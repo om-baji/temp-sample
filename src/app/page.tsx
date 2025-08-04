@@ -4,6 +4,7 @@ import FilterCard from '@/components/FilterCard'
 import Card from '@/components/Card'
 import ListItem from '@/components/ListItem'
 import data from '../../public/data.json'
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward' 
 
 const ITEMS_PER_PAGE = 12; 
 
@@ -230,12 +231,10 @@ const Page = () => {
       
       <button
         onClick={scrollToTop}
-        className="fixed bottom-6 right-6 w-12 h-12 p-7 bg-blue-200 rounded-lg shadow-lg hover:bg-blue-400 transition-colors duration-200 flex items-center justify-center z-50"
+        className="fixed bottom-18 right-6 w-12 h-12 p-7 bg-blue-200 rounded-lg shadow-lg hover:bg-blue-400 transition-colors duration-200 flex items-center justify-center z-50"
         aria-label="Scroll to top"
       >
-        <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
-          <path d="M12 4l8 8h-6v8h-4v-8H4z"/>
-        </svg>
+        <ArrowUpwardIcon />
       </button>
     </div>
   );
