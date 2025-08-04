@@ -91,7 +91,7 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
 
     return (
         <div
-            className="rounded shadow p-6 w-full max-w-6xl mx-auto mt-6"
+            className="rounded shadow p-6 w-full mt-16 max-w-6xl mx-auto mt-6"
             style={{
                 backgroundImage: "url('/banner.jpg')",
                 backgroundSize: 'cover',
