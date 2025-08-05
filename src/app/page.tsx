@@ -13,9 +13,9 @@ const Page = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [activeFilters, setActiveFilters] = useState({
     zipcode: '',
-    district: '',
-    projectType: '',
-    housingType: ''
+    district: 'all',
+    projectType: 'all',
+    housingType: 'all'
   });
 
   const filteredData = useMemo(() => {
@@ -72,9 +72,9 @@ const Page = () => {
   const handleReset = () => {
     setActiveFilters({
       zipcode: '',
-      district: '',
-      projectType: '',
-      housingType: ''
+      district: 'all',
+      projectType: 'all',
+      housingType: 'all'
     });
   };
 
@@ -121,13 +121,28 @@ const Page = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen pb-10">
-      <FilterCard 
-        filters={activeFilters}
-        onFiltersChange={handleFiltersChange}
-        onReset={handleReset}
-      />
-      <div className="max-w-6xl mx-auto mt-6 bg-white rounded shadow p-6">
+    <div className="min-h-screen pb-10">
+      <div 
+        className="w-full"
+        style={{
+          backgroundImage: "url('/banner.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          minHeight: '400px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
+        <FilterCard 
+          filters={activeFilters}
+          onFiltersChange={handleFiltersChange}
+          onReset={handleReset}
+        />
+      </div>
+      <div className="bg-gray-50">
+        <div className="max-w-6xl mx-auto mt-6 bg-white rounded shadow p-6">
         <div className="flex items-center justify-between border-b mb-6 pb-2">
           <div className="text-sm text-gray-600">
             Showing {filteredData.length > 0 ? startIndex + 1 : 0}-{Math.min(endIndex, filteredData.length)} of {filteredData.length} listings
@@ -227,6 +242,7 @@ const Page = () => {
             )}
           </>
         )}
+      </div>
       </div>
       
       <button

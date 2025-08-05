@@ -22,9 +22,9 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
     const [showZipSuggestions, setShowZipSuggestions] = useState(false);
     const [formValues, setFormValues] = useState({
         zipcode: '',
-        district: '',
-        projectType: '',
-        housingType: ''
+        district: 'all',
+        projectType: 'all',
+        housingType: 'all'
     });
 
     const allZipcodes = useMemo(() => getAllZipcodes(), []);
@@ -76,9 +76,9 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
     const handleReset = () => {
         const resetValues = {
             zipcode: '',
-            district: '',
-            projectType: '',
-            housingType: ''
+            district: 'all',
+            projectType: 'all',
+            housingType: 'all'
         };
         setFormValues(resetValues);
         onReset();
@@ -91,15 +91,7 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
 
     return (
         <div
-            className="rounded shadow p-6 w-full mt-16 max-w-6xl mx-auto mt-6"
-            style={{
-                backgroundImage: "url('/banner.jpg')",
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                backgroundColor: 'rgba(255,255,255,0.85)',
-                backgroundBlendMode: 'screen'
-            }}
+            className="rounded shadow p-10 w-full mt-16 max-w-6xl mx-auto mt-6 bg-white"
         >
             <form className="flex flex-col gap-4" autoComplete="off" onSubmit={handleSubmit}>
                 <div className="flex flex-wrap gap-6">
@@ -144,7 +136,6 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
                             value={formValues.district}
                             onChange={handleDistrictChange}
                         >
-                            <option value="">Select District</option>
                             <option value="all">Select All Districts</option>
                             {districts.map((district, idx) => (
                                 <option key={idx} value={district}>{district}</option>
@@ -159,7 +150,6 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
                             value={formValues.projectType}
                             onChange={handleProjectTypeChange}
                         >
-                            <option value="">Select Type</option>
                             <option value="all">Select All Types</option>
                             {typelist.map((type, idx) => (
                                 <option key={idx} value={type}>{type}</option>
@@ -174,7 +164,6 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
                             value={formValues.housingType}
                             onChange={handleHousingTypeChange}
                         >
-                            <option value="">Select Housing Type</option>
                             <option value="all">Select All Housing Types</option>
                             {housinglist.map((type, idx) => (
                                 <option key={idx} value={type}>{type}</option>

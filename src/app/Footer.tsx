@@ -4,12 +4,12 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#28649b] text-white pt-10  pb-6 min-h-[220px] mb-20">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start px-6 pb-8 gap-10">
+    <footer className="w-full bg-[#245c91] text-white pt-10  pb-6 min-h-[220px] mb-20 px-10">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start pb-8 gap-10 px-10">
         <div className="flex flex-col md:flex-row gap-14 flex-1">
           <div className="min-w-[180px] mb-7 md:mb-0">
             <div className="font-bold text-xl mb-5">Help and Support</div>
-            <ul className="space-y-2.5 text-[15px] font-normal">
+            <ul className="space-y-5.5 text-[15px] font-normal">
               <li><a href="#" className="hover:underline">Miami-Dade Home</a></li>
               <li><a href="#" className="hover:underline">Privacy Statement</a></li>
               <li><a href="#" className="hover:underline">ADA Notice</a></li>
@@ -19,7 +19,7 @@ const Footer = () => {
           </div>
           <div className="min-w-[180px] mb-7 md:mb-0">
             <div className="font-bold text-xl mb-5">Self-Service</div>
-            <ul className="space-y-2.5 text-[15px] font-normal">
+            <ul className="space-y-5.5 text-[15px] font-normal">
               <li><a href="#" className="hover:underline">311 Contact Center</a></li>
               <li><a href="#" className="hover:underline">Mobile Applications</a></li>
               <li><a href="#" className="hover:underline">Open Data</a></li>
@@ -29,7 +29,7 @@ const Footer = () => {
           </div>
           <div className="min-w-[210px] mb-7 md:mb-0">
             <div className="font-bold text-xl mb-5">Stay Connected</div>
-            <ul className="space-y-2.5 text-[15px] font-normal">
+            <ul className="space-y-5.5 text-[15px] font-normal">
               <li><a href="#" className="hover:underline">Legal Ads & Public Notices</a></li>
               <li><a href="#" className="hover:underline">Social Media Directory</a></li>
               <li><a href="#" className="hover:underline">Watch Government Meetings</a></li>
