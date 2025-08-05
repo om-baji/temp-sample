@@ -3,10 +3,60 @@ import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import LogoutIcon from '@mui/icons-material/Logout';
 
+// Declare global types for Google Translate
+declare global {
+  interface Window {
+    google: {
+      translate: {
+        TranslateElement: {
+          new (options: {
+            pageLanguage: string;
+            includedLanguages?: string;
+            autodisplay: boolean;
+            layout: number;
+          }, elementId: string): void;
+          InlineLayout: {
+            SIMPLE: number;
+          };
+        };
+      };
+    };
+  }
+}
+
 const Header = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  
+
+  useEffect(() => {
+    (window as any).googleTranslateElementInit = () => {
+      if (window.google && window.google.translate) {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            includedLanguages: "en,es,ht", 
+            autodisplay: false,
+            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
+          }, 
+          'google_translate_element');
+      }
+    };
+
+    const script = document.createElement('script'); 
+    script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.async = true;
+    document.body.appendChild(script); 
+
+    return () => {
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+      delete (window as any).googleTranslateElementInit;
+    }
+  }, [])
 
   useEffect(() => {
     if (showSearch && searchInputRef.current) {
@@ -60,12 +110,13 @@ const Header = () => {
           <a href="#" className="hover:underline">GovMeetings</a>
           <a href="#" className="hover:underline">Calendar</a>
           <div className="relative group">
-            <button className="flex items-center gap-1 hover:underline">
+            <button className="hover:cursor-pointer flex items-center gap-1 hover:underline">
               Translate
               <svg width="12" height="12" fill="currentColor" className="inline ml-1">
                 <path d="M6 9l4-5H2z"/>
               </svg>
             </button>
+            <div id="google_translate_element" className="absolute top-full left-0 mt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 hover:opacity-100 hover:visible z-50 bg-white p-2 rounded shadow-lg"></div>
           </div>
         </div>
       </div>
