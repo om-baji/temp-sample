@@ -29,7 +29,7 @@ const ListItem: React.FC<ListItemProps> = ({
 
   return (
     <div className="flex bg-white rounded-lg shadow border overflow-hidden w-full">
-      <div className="w-40 h-40 flex-shrink-0 bg-gray-200 relative">
+      <div className="w-40 max-h-60 flex-shrink-0 bg-gray-200 relative">
         <Image
           src={imageUrl}
           alt={project}

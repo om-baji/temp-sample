@@ -14,6 +14,10 @@ data.forEach(obj => {
     if(obj.housingType && !housinglist.includes(obj.housingType)) housinglist.push(obj.housingType);
 });
 
+districts.sort((a,b) => a - b)
+typelist.sort()
+housinglist.sort()
+
 export {
     districts,
     typelist,

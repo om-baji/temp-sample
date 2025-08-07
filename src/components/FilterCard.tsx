@@ -170,9 +170,8 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
                             ))}
                         </select>
                     </div>
-                </div>
 
-                <div className="flex gap-2 mt-4">
+                    <div className="flex gap-2 mt-4">
                     <button 
                         type="button" 
                         className="border border-gray-300 rounded px-4 py-2 text-sm font-medium bg-white hover:bg-gray-50"
@@ -187,6 +186,9 @@ const FilterCard = ({ filters, onFiltersChange, onReset }: FilterCardProps) => {
                         Search
                     </button>
                 </div>
+                </div>
+
+                
             </form>
         </div>
     )

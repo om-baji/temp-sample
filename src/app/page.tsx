@@ -6,7 +6,7 @@ import ListItem from '@/components/ListItem'
 import data from '../../public/data.json'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward' 
 
-const ITEMS_PER_PAGE = 12; 
+const ITEMS_PER_PAGE = 30; 
 
 const Page = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
